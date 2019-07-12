@@ -1,72 +1,144 @@
 <template>
   <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        Landing-SENArestaurant
-      </h1>
-      <h2 class="subtitle">
-        Project to certificate in SENA
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+    <header>
+      <div id="logo">
+          <img src="../assets/images/logo.png" alt="">
       </div>
-    </div>
+      <div id="nav" >
+        <ul>
+          <nuxt-link to="/">
+          <li>
+          Inicio
+        </li>
+          </nuxt-link>
+         <nuxt-link to="/">
+          <li>
+          Carta
+        </li>
+          </nuxt-link>
+        
+      </ul>
+      </div>
+      
+    </header>
+    <section class="welcome">
+         <cardwelcome/>
+    </section>
+    <section class="food">
+      <cardmeals/>
+    </section>
+    <section class="chef">
+    </section>
+
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
 
+// var tl = new TimelineMax({onUpdate:updatePercentage});
+// const controller = new ScrollMagic.Controller();
+// tl.from("blockquote", .5, {x:200,opacity:0});
+
+// const scene= new ScrollMagic.Scene({
+//     triggerElement:".sticky",
+//     triggerHook:"onLeave",
+//     duration:"100%"
+// })
+//     .setPin(".sticky")
+//     .setTween(tl)
+//         .addTo(controller);
+
+// function updatePercentage(){
+//     tl.progress();
+//     console.log(tl.progress())
+// }
+import cardwelcome from '~/components/cardwelcome.vue'
+import cardmeals from '~/components/cardmeals.vue'
 export default {
   components: {
-    Logo
-  }
+    cardwelcome,
+    cardmeals
+  },
+  methods:{}
+  
+
 }
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+<style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Montserrat|Reenie+Beanie&display=swap');
+header{
+  height: 60px;
+  #logo{
+    margin:5px 0px 5px 50px;
+    float:left;
+    img{
+      height: 40px;
+      width: 100px;
+    }
+  }
+  #nav{
+    float: right;
+    margin: 0px 40px 0px 0px;
+    text-align:center;
+    vertical-align: center;
+    ul{
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      a{
+        text-decoration: none;
+        color:black;
+      }
+      li{
+        width: 100px;
+        height: 60px;
+        padding: 20px;
+        font-size:20px;
+        cursor: pointer;
+        transition:.5s;
+      }
+      li:hover{
+        color:#fff;
+        background-color: #e5d9ca;
+      }
+    }
+  }
+}
+.container{
+    margin: 0;
+    font-family: 'Josefin Sans';
+    h1{
+        font-size: 2em;
+        text-align: center;
+    }
+    .welcome{
+      position: sticky;
+      top: 0;
+      background: url('../assets/images/firts2.jpg') no-repeat;
+      background-size: cover;
+      
+    }
+    .food{
+      background: url('../assets/images/firts3.jpeg') no-repeat;
+      background-size: cover;
+      position: sticky;
+      top: 0
+    }
+    .chef{
+      background: url('../assets/images/firts1.jpg') no-repeat;
+      background-size: cover;
+      position: sticky;
+      top: 0
+    }
+    
 }
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+section{
+    padding: 3em;
+    height: 100vh;
+    position: relative;
+    box-sizing:border-box; 
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
 
-.links {
-  padding-top: 15px;
-}
 </style>
