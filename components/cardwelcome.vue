@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="cardwelcome">
-          <h1>The Table</h1>
+          <h1>Escuela de Gastronomia CISM</h1>
           <!-- <h2>Cocina de alta calidad</h2> -->
           <p>Cocina de alta calidad a un precio accesible</p>
           <button> Conoce más</button>
@@ -25,7 +25,7 @@ export default {
         color: #000;
         margin:100px 0px 0px 100px;
         h1{
-          text-align:left;
+          text-align:center;
           font-family: 'Reenie Beanie', cursive;
           font-size:100px;
           margin-bottom:0px;

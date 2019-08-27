@@ -1,11 +1,17 @@
 <template>
+<div>  
     <div class="containfood">
         <div class="cardmeal" v-for="(meal,index) in meals" :key="index">
           <img :src='meal.img' alt="">
-          <p>{{meal.text}}</p>
-          <button> Comprar ahora</button>
+          <div class="info">
+            <p>{{meal.text}}</p>
+            <button> Comprar ahora</button>
+          </div>
+          
         </div>
     </div>
+</div>
+    
 </template>
 
 <script>
@@ -28,7 +34,19 @@ export default {
         {
             img:'https://images.pexels.com/photos/46239/salmon-dish-food-meal-46239.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
             text:"Salmon Salad"
-        }
+        },
+        {
+            img:'https://images.pexels.com/photos/46239/salmon-dish-food-meal-46239.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+            text:"Salmon Salad"
+        },
+        {
+            img:'https://images.pexels.com/photos/46239/salmon-dish-food-meal-46239.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+            text:"Salmon Salad"
+        },
+        {
+            img:'https://images.pexels.com/photos/46239/salmon-dish-food-meal-46239.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+            text:"Salmon Salad"
+        },
       ]
       }
     }
@@ -36,23 +54,33 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .containfood{
     display:grid;
-    grid-template-columns: repeat(2,250px);
-    grid-gap: 20px;
+    grid-template-columns: repeat(4,250px);
+    grid-gap: 80px;
+    max-width:1000px;
+    justify-content:center;
+    margin:0 auto;
 }
  .cardmeal{
         display: grid;
       justify-items: center;
-        width:250px;
-        height:250px;
+        width:300px;
+        height:300px;
         color: #000;
         background-color: #fff;
-        margin:20px 0px 0px 100px;
+        .info{
+            border:1px solid black;
+            width:100%;
+            display:grid;
+            justify-content:center;
+            justify-items:center;
+            padding:20px;
+        }
         img{
             width:100%;
-            height: 150px;
+            height: 200px;
         }
         h1{
           text-align:left;
@@ -71,6 +99,14 @@ export default {
           border:.5px solid black;
           height: 40px;
           width: 100px;
+          cursor:pointer;
+          transition: .3s ease-in-out; 
+        }
+        button:hover{
+          color:#fff;
+          background-color: #000;
+          border:.5px solid #fff;
+    
         }
 
         }

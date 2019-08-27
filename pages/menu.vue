@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <header>
-      <nuxt-link to="/">
+        <nuxt-link to="/">
       <div id="logo">
           <img src="../assets/images/logo.png" alt="">
       </div>
@@ -13,25 +13,42 @@
           Inicio
         </li>
           </nuxt-link>
-         <nuxt-link to="/menu">
+      </ul>
+      </div>
+    </header>
+    <header>
+      <div id="navmenu" >
+        <ul>
+          <nuxt-link to="/Carnes">
           <li>
-          Carta
+           Carnes
         </li>
           </nuxt-link>
-        
+         <nuxt-link to="/Entradas">
+          <li>
+          Entradas
+        </li>
+          </nuxt-link>
+        <nuxt-link to="/Arroces">
+          <li>
+              Bedidas
+          
+        </li>
+          </nuxt-link>
+          <nuxt-link to="/Servicios">
+          <li>
+          Servicios
+        </li>
+          </nuxt-link>
       </ul>
       </div>
       
+      
     </header>
-    <section class="welcome">
-         <cardwelcome/>
-    </section>
+    
     <section class="food">
       <cardmeals/>
     </section>
-    <section class="chef">
-    </section>
-
   </div>
 </template>
 
@@ -54,11 +71,9 @@
 //     tl.progress();
 //     console.log(tl.progress())
 // }
-import cardwelcome from '~/components/cardwelcome.vue'
-import cardmeals from '~/components/cardmealsLanding.vue'
+import cardmeals from '~/components/cardmealsMenu.vue'
 export default {
   components: {
-    cardwelcome,
     cardmeals
   },
   methods:{}
@@ -70,7 +85,7 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Montserrat|Reenie+Beanie&display=swap');
 header{
   height: 60px;
-  position:sticky;
+   position:sticky;
   top:0;      
   z-index: 999999;
   background-color: #fff;
@@ -80,6 +95,33 @@ header{
     img{
       height: 40px;
       width: 100px;
+    }
+  }
+  #navmenu{
+    float: left;
+    margin: 0px 40px 0px 0px;
+    text-align:center;
+    vertical-align: center;
+    ul{
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      a{
+        text-decoration: none;
+        color:black;
+      }
+      li{
+        width: auto;
+        height: 60px;
+        padding: 20px;
+        font-size:20px;
+        cursor: pointer;
+        transition:.5s;
+      }
+      li:hover{
+        color:#fff;
+        background-color: #e5d9ca;
+      }
     }
   }
   #nav{
@@ -116,25 +158,6 @@ header{
     h1{
         font-size: 2em;
         text-align: center;
-    }
-    .welcome{
-      position: sticky;
-      top: 0;
-      background: url('../assets/images/firts2.jpg') no-repeat;
-      background-size: cover;
-      
-    }
-    .food{
-      background: url('../assets/images/firts3.jpeg') no-repeat;
-      background-size: cover;
-      position: sticky;
-      top: 0
-    }
-    .chef{
-      background: url('../assets/images/firts1.jpg') no-repeat;
-      background-size: cover;
-      position: sticky;
-      top: 0
     }
     
 }
