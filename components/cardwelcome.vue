@@ -47,4 +47,17 @@ export default {
         }
 
         }
+@media screen and (max-width: 1000px) {
+  .cardwelcome{
+        padding:50px;
+        margin:0px;
+  }
+}   
+@media screen and (max-width: 700px) {
+  .cardwelcome{
+        h1{
+          font-size:70px;
+        }
+  }
+} 
 </style>

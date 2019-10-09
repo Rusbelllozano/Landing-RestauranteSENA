@@ -1,6 +1,23 @@
 <template>
   <div class="container">
     <header>
+      <div id="navmenuR">
+        <img id="menuham" @click="showmenu=!showmenu" src="../assets/images/menuham.png" />
+        <div id="navR" v-if="showmenu" >
+          <ul>
+            <nuxt-link to="/">
+            <li>
+            Inicio
+          </li>
+            </nuxt-link>
+          <nuxt-link to="/menu">
+            <li>
+            Carta
+          </li>
+            </nuxt-link>
+          </ul>
+        </div>
+      </div>
       <nuxt-link to="/">
       <div id="logo">
           <img src="../assets/images/logo.png" alt="">
@@ -57,6 +74,11 @@
 import cardwelcome from '~/components/cardwelcome.vue'
 import cardmeals from '~/components/cardmealsLanding.vue'
 export default {
+   data: function () {
+    return {
+      showmenu:false
+    }
+  },
   components: {
     cardwelcome,
     cardmeals
@@ -80,6 +102,38 @@ header{
     img{
       height: 40px;
       width: 100px;
+    }
+  }
+   #navmenuR{
+    display:none;
+    float:right;
+    #navR{
+      ul{
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      position:absolute;
+      a{
+        text-decoration: none;
+        color:black;
+      }
+      li{
+        width: 100px;
+        height: 60px;
+        padding: 20px;
+        font-size:20px;
+        cursor: pointer;
+        transition:.5s;
+      }
+      li:hover{
+        color:#fff;
+        background-color: #e5d9ca;
+      }
+    }
+    }
+    #menuham{
+      width:50px;
+      padding:10px;
     }
   }
   #nav{
@@ -128,7 +182,8 @@ header{
       background: url('../assets/images/firts3.jpeg') no-repeat;
       background-size: cover;
       position: sticky;
-      top: 0
+      top: 0;   
+      overflow:scroll;
     }
     .chef{
       background: url('../assets/images/firts1.jpg') no-repeat;
@@ -145,6 +200,15 @@ section{
     position: relative;
     box-sizing:border-box; 
 }
-
+@media screen and (max-width: 700px) {
+  header{
+    #navmenuR{
+      display:flex;
+    }
+    #nav{
+      display: none;
+    }
+  }
+  }
 
 </style>

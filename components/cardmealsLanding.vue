@@ -79,4 +79,20 @@ export default {
         }
 
         }
+@media screen and (max-width: 800px) {
+  .cardwelcome{
+        padding:50px;
+        margin:0px;
+  }
+  .cardmeal{
+        margin:20px 0px 0px 50px;
+        }
+}
+@media screen and (max-width: 700px) {
+  .containfood{
+    display:grid;
+    grid-template-columns: 250px;
+    grid-gap: 20px;
+}
+}  
 </style>
