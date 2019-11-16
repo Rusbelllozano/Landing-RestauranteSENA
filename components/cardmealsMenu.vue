@@ -40,6 +40,7 @@ export default {
     data () {
     return {
       dialogTableVisible: false,
+      checked:false,
       selectedMeal:[],
       meals:[
         {

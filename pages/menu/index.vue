@@ -3,7 +3,7 @@
     <header>
         <nuxt-link to="/">
       <div id="logo">
-          <img src="../assets/images/logo.png" alt="">
+          <img src="../../assets/images/logo.png" alt="">
       </div>
       </nuxt-link>
       <div id="nav" >
@@ -18,27 +18,27 @@
     </header>
     <header>
      <div id="navmenuR" @click="showmenu = !showmenu">
-      <img id="menuham" src="../assets/images/menuham.png" />
+      <img id="menuham" src="../../assets/images/menuham.png" />
      </div> 
       <div id="navmenu" v-if="showmenu" >
         <ul>
-          <nuxt-link to="/Carnes">
+          <nuxt-link to="/menu/carnes">
           <li>
            Carnes
         </li>
           </nuxt-link>
-         <nuxt-link to="/Entradas">
+         <nuxt-link to="/menu/entradas">
           <li>
           Entradas
         </li>
           </nuxt-link>
-        <nuxt-link to="/Arroces">
+        <nuxt-link to="/menu/bebidas">
           <li>
               Bedidas
           
         </li>
           </nuxt-link>
-          <nuxt-link to="/Servicios">
+          <nuxt-link to="/menu/servicios">
           <li>
           Servicios
         </li>
