@@ -24,25 +24,24 @@
         <ul>
           <nuxt-link to="/menu/carnes">
           <li>
-           Carnes
+           Plato Fuerte
         </li>
           </nuxt-link>
          <nuxt-link to="/menu/entradas">
           <li>
-          Entradas
-        </li>
+            Entradas
+          </li>
           </nuxt-link>
         <nuxt-link to="/menu/bebidas">
           <li>
-              Bedidas
-          
-        </li>
-          </nuxt-link>
-          <nuxt-link to="/menu/servicios">
+            Bedidas
+          </li>
+        </nuxt-link>
+        <nuxt-link to="/menu/servicios">
           <li>
           Servicios
-        </li>
-          </nuxt-link>
+          </li>
+        </nuxt-link>
       </ul>
       </div>
       

@@ -20,7 +20,8 @@
   </el-form-item>
   <el-form-item label="Categoria" prop="region">
     <el-select v-model="ruleForm.region" placeholder="Elige una cateogoria">
-      <el-option label="Carnes" value="Carnes"></el-option>
+      <el-option label="Plato fuerte" value="Plato fuerte"></el-option>
+      <el-option label="Entradas" value="Entradas"></el-option>
       <el-option label="Bebidas" value="Bebidas"></el-option>
     </el-select>
   </el-form-item>
@@ -32,22 +33,39 @@
   v-model="ruleForm.description">
 </el-input>
 </el-form-item>
-  <!-- <el-form-item label="Instant delivery" prop="delivery">
-    <el-switch v-model="ruleForm.delivery"></el-switch>
-  </el-form-item> -->
-  <!-- <el-form-item label="Activity type" prop="type">
-    <el-checkbox-group v-model="ruleForm.type">
-      <el-checkbox label="Online activities" name="type"></el-checkbox>
-      <el-checkbox label="Promotion activities" name="type"></el-checkbox>
-      <el-checkbox label="Offline activities" name="type"></el-checkbox>
-      <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
-    </el-checkbox-group>
-  </el-form-item> -->
+<el-form-item label="Precio" prop="precio">
+  <el-input 
+  placeholder="Ingresa el precio del producto"
+  v-model="ruleForm.precio">
+</el-input>
+</el-form-item>
+<el-form-item>
+    <el-button type="primary" @click="adicionales = true">Agregar adicionales</el-button>
+  </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
     <el-button @click="resetForm('ruleForm')">Reset</el-button>
   </el-form-item>
 </el-form>
+<div class="newFormAdicionales" v-if="adicionales">
+  <el-button type="primary" @click="agregarAdicional()">Agregar otro adicional</el-button>
+    <el-button @click="resetForm('ruleForm')">Limpiar</el-button>
+    <el-form v-for="(list,index) in listaadicionales" :key="index"  :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" >
+      <h3>Adicional #{{index+1}}</h3>
+  <el-form-item label="Nombre" prop="name">
+    <el-input v-model="ruleForm.name" placeholder="Escribe un nombre del producto" ></el-input>
+  </el-form-item>
+  <el-form-item label="Precio" prop="precio">
+    <el-input 
+      placeholder="Ingresa el precio del producto"
+      v-model="ruleForm.precio">
+    </el-input>
+  </el-form-item>
+</el-form>
+<el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
+</div>
+
+
 </div>
   
 </template>
@@ -57,7 +75,9 @@ export default {
     data() {
       return {
         dialogImageUrl: '',
+        adicionales:false,
         dialogVisible: false,
+        listaadicionales:[],
         ruleForm: {
           name: '',
           region: '',
@@ -108,6 +128,9 @@ export default {
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
+      },
+      agregarAdicional() {
+        this.listaadicionales.push([{nombre:"", precio:""}])
       }
     }
   }
@@ -117,5 +140,9 @@ export default {
 .formNew{
   padding: 100px;
   display: grid;
+}
+.newFormAdicionales{
+  padding: 150px;
+  background-color:#d0d0d0;
 }
 </style>
