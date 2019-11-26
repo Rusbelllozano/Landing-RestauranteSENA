@@ -32,6 +32,12 @@ module.exports = {
     '@/plugins/element-ui'
   ],
   /*
+  ** Router Setting
+  */
+ router:{
+   middleware:'authenticated'
+ },
+  /*
   ** Nuxt.js modules
   */
   modules: [
