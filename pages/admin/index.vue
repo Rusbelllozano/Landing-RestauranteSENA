@@ -2,9 +2,10 @@
 <div>
   <div class="login">
     <label>Correo Electronico</label>
-    <el-input v-model="account.usermail" placeholder="Ingrese el correo" ></el-input>
+    <el-input type="email" v-model="account.usermail" placeholder="Ingrese el correo" ></el-input>
     <label>Contraseña</label>
-    <el-input v-model="account.userpassword" placeholder="Ingrese la comtraseña" ></el-input>
+    <el-input type="password" v-model="account.userpassword" placeholder="Ingrese la comtraseña" ></el-input>
+    <div v-if="isError"><p>{{errMsg}}</p></div>
     <el-button type="primary" @click="login()">Iniciar Sesion</el-button>
   </div>
 </div>
@@ -19,11 +20,20 @@ export default {
             usermail:"",
         userpassword:"",
         },
+        isError:false,
+        errMsg:""
       }},
       methods:{
         login(){
-          this.$store.dispatch("users/login", this.account);
-          this.$router.push("/admin/pedidos")
+          this.$store.dispatch('users/login', this.account).catch(error =>{
+            this.isError=true;
+            this.errMsg= error.code
+            setTimeout(() => {
+              this.isError=false 
+            }, 5000);
+            
+          })
+          
         }
       }
 }

@@ -1,4 +1,7 @@
 import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore"
+import "firebase/storage"
 var firebaseConfig = {
     apiKey: "AIzaSyC2BvGDU-wK-h-Fps0Wt4std_FWBOKdEXI",
     authDomain: "restaurante-senarsle.firebaseapp.com",

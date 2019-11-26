@@ -1,5 +1,6 @@
 <template>
   <div class="admin">
+    <el-button type="danger" @click="logout()" round>Cerrar Sesion</el-button>
        <nuxt-link to="/admin/pedidos">
     <el-button type="primary">Pedidos</el-button>
     </nuxt-link>
@@ -52,6 +53,8 @@
 </template>
 
 <script>
+import {auth } from "@/services/firebase";
+import Cookie from "js-cookie";
 export default {
     data() {
       return {
@@ -76,7 +79,11 @@ export default {
         }]
       }},
       methods:{
-        
+        async logout(){
+          await auth.signOut()
+          await Cookie.remove("access_token");
+          location.href="/admin";
+        }
       }
 }
 </script>
