@@ -47,33 +47,23 @@
       <cardmeals/>
     </section>
     <section class="chef">
+      <div class="infoSENA">
+        <p>
+          El SENA cuenta con un programa en Cocina que ofrece los servicios de almuerzo a los instructores, administrativos y aprendices 
+        </p>
+      </div>
     </section>
 
   </div>
 </template>
 
 <script>
-
-// var tl = new TimelineMax({onUpdate:updatePercentage});
-// const controller = new ScrollMagic.Controller();
-// tl.from("blockquote", .5, {x:200,opacity:0});
-
-// const scene= new ScrollMagic.Scene({
-//     triggerElement:".sticky",
-//     triggerHook:"onLeave",
-//     duration:"100%"
-// })
-//     .setPin(".sticky")
-//     .setTween(tl)
-//         .addTo(controller);
-
-// function updatePercentage(){
-//     tl.progress();
-//     console.log(tl.progress())
-// }
 import cardwelcome from '~/components/cardwelcome.vue'
 import cardmeals from '~/components/cardmealsLanding.vue'
 export default {
+  created(){
+    this.$store.dispatch('GET_PRODUCTS')
+  },
    data: function () {
     return {
       showmenu:false
@@ -83,9 +73,9 @@ export default {
     cardwelcome,
     cardmeals
   },
-  methods:{}
-  
+  methods:{
 
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -189,7 +179,21 @@ header{
       background: url('../assets/images/firts1.jpg') no-repeat;
       background-size: cover;
       position: sticky;
-      top: 0
+      top: 0;
+      display: grid;
+      justify-content: center;
+      align-content: center;
+      .infoSENA{
+        background-color:red;
+        width: 500px;
+        height: 500px;
+        display: grid;
+      justify-content: center;
+      align-content: center;
+      p{
+        padding: 20px;
+      }
+      }
     }
     
 }

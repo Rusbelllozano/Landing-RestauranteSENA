@@ -39,25 +39,12 @@ export default {
     data() {
       return {
         value2:false,
-        tableDataproductos: [{
-            date: '2016-05-03',
-            name: 'Pollo',
-            address: 'No. 189, Grove St, Los Angeles'
-          }, {
-            date: '2016-05-02',
-            name: 'Carne',
-            address: 'No. 189, Grove St, Los Angeles'
-          }, {
-            date: '2016-05-04',
-            name: 'Tom',
-            address: 'No. 189, Grove St, Los Angeles'
-          }, {
-            date: '2016-05-01',
-            name: 'Tom',
-            address: 'No. 189, Grove St, Los Angeles'
-          }],
-        
       }},
+      computed:{
+         tableDataproductos(){
+           return this.$store.state.products
+         }
+      },
       methods:{
         async logout(){
           await auth.signOut()
