@@ -25,6 +25,9 @@
           <el-option label="Bebidas" value="Bebidas"></el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="Cantidad" prop="cantidad">
+        <el-input v-model="ruleForm.cantidad" placeholder="Ingrese la cantidad de producto"></el-input>
+      </el-form-item>
       <el-form-item label="Descripción" prop="descripcion">
         <el-input 
           type="textarea"
@@ -81,6 +84,7 @@ export default {
           nombre:'',
           precio:null,
           descripcion:"",
+          cantidad:null,
           categoria:"",
           linkimgpro:"",
           adicionales:""
@@ -88,6 +92,9 @@ export default {
         rules: {
           nombre: [
             { required: true, message: 'Por favor ingrese el nombre del producto', trigger: 'blur' },
+          ],
+          cantidad: [
+            { required: true, message: 'Por favor ingresr la cantidad de producto', trigger: 'change' }
           ],
           categoria: [
             { required: true, message: 'Por favor seleccione una categoria', trigger: 'change' }
@@ -114,6 +121,7 @@ export default {
               nombre:this.ruleForm.nombre,
               precio:this.ruleForm.precio,
               descripcion:this.ruleForm.descripcion,
+              cantidad:this.ruleForm.cantidad,
               categoria:this.ruleForm.categoria,
               linkimgpro:"",
               adicionales:this.ruleForm.adicionales
