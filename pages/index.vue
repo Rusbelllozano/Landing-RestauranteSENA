@@ -62,7 +62,6 @@ import cardwelcome from '~/components/cardwelcome.vue'
 import cardmeals from '~/components/cardmealsLanding.vue'
 export default {
   created(){
-    this.$store.dispatch('GET_PRODUCTS')
   },
    data: function () {
     return {
