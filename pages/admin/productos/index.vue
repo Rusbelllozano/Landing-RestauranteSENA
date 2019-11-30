@@ -37,7 +37,6 @@ import {auth } from "@/services/firebase";
 import Cookie from "js-cookie";
 export default {
   created(){
-console.log(this.$store.state.products)
   },
     data() {
       return {

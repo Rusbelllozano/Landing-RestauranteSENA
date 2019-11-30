@@ -6,8 +6,9 @@ export const state = () => ({
 }) 
 export const mutations={
      SET_PRODUCTS(state, listproducts){
+         console.log("parce no se hace la mutation")
         state.products= listproducts
-        
+        console.log(state.products)
     }
 }
 export const actions={
@@ -31,7 +32,7 @@ export const actions={
             querySnapshot.forEach(function(doc) {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
-                listproducts.push(doc);
+                listproducts.push(doc.data());
             })
         })
         
