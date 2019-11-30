@@ -26,19 +26,17 @@ export const actions={
                 email:decoded.email
             })
         }
-        console.log("nuxtserver")
         let listproducts=[]
-        db.collection("productos").get().then(function(querySnapshot) {
+        let getproducts= await db.collection("productos").get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
                 listproducts.push(doc);
             })
-        }).then(
-            await function() {
-                commit("SET_PRODUCTS", listproducts)
-            }
-        )
+        })
+        
+        commit("SET_PRODUCTS", listproducts)
+            
 
     },
     
