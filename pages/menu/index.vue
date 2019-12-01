@@ -22,7 +22,7 @@
      </div> 
       <div id="navmenu" v-if="showmenu" >
         <ul>
-          <nuxt-link to="/menu/carnes">
+          <nuxt-link to="/menu">
           <li>
            Plato Fuerte
         </li>
@@ -42,54 +42,81 @@
           Servicios
           </li>
         </nuxt-link>
+        <li class="carrito" @click="dialogTableVisible=true">Orden</li>
       </ul>
       </div>
-      
-      
     </header>
-    
+    <el-dialog class="dialogOrder" title="Informacion de la Orden" :visible.sync="dialogTableVisible">
+          <div v-for="(pedido,index) in pedidoActual" :key="index">
+            <div>
+              {{index+1}}
+            {{pedido.nombre}}
+            {{pedido.precio}}
+            </div>
+            
+          </div>
+            <el-button type="success" @click="confirmarOrden(pedidoActual)">Confirmar Orden<i class="el-icon-check el-icon-right"></i></el-button>
+    </el-dialog>
     <div class="food">
-      <cardmeals/>
+      <cardmeals :listproducts="listproductsActivos"/>
     </div>
   </div>
 </template>
 
 <script>
-
-// var tl = new TimelineMax({onUpdate:updatePercentage});
-// const controller = new ScrollMagic.Controller();
-// tl.from("blockquote", .5, {x:200,opacity:0});
-
-// const scene= new ScrollMagic.Scene({
-//     triggerElement:".sticky",
-//     triggerHook:"onLeave",
-//     duration:"100%"
-// })
-//     .setPin(".sticky")
-//     .setTween(tl)
-//         .addTo(controller);
-
-// function updatePercentage(){
-//     tl.progress();
-//     console.log(tl.progress())
-// }
+import {db} from "@/services/firebase";
 import cardmeals from '~/components/cardmealsMenu.vue'
+import { format } from 'path'
 export default {
    data: function () {
     return {
-      showmenu:true
+      showmenu:true,
+      dialogTableVisible:false
     }
   },
   components: {
     cardmeals
   },
-  methods:{}
-  
+  methods:{
+    confirmarOrden(pedidoActual){
+      // let costototal
+      // for (let index = 0; index < pedidoActual.length; index++) {
+      //   costototal=costototal+ pedidoActual[index].precio;
+        
+      // }
+      // alert(costototal)
+      db.collection("pedidos").add({
+              costototal:pedidoActual[0].precio,
+              idpedido:0,
+              productos:pedidoActual,
+              ubicacion:"mesa2"
+          })
+          .then(function(docRef) {
+            
+              console.log("Document written with ID: ", docRef.id);
+          })
+          .catch(function(error) {
+              console.error("Error adding document: ", error);
+          });
+    }
+  },
+  computed:{
+    listproductsActivos(){
+      return this.$store.state.products.filter(product => product.cantidad > 0)
+    },
+    pedidoActual(){
+      return this.$store.state.pedido
+    }
+  }
 
 }
 </script>
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Montserrat|Reenie+Beanie&display=swap');
+.dialogOrder{
+  display: grid;
+  align-content: center;
+}
 header{
   height: 60px;
    position:sticky;
@@ -136,6 +163,10 @@ header{
         color:#fff;
         background-color: #e5d9ca;
       }
+      .carrito{
+        position: absolute;
+        right:0;
+      }
     }
   }
   #nav{
@@ -176,7 +207,7 @@ header{
     
 }
 .food{
-      // height:100vh;
+      height:100vh;
       background-color:#b59f95;
       padding:50px;
           }

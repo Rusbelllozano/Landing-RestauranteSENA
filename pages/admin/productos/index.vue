@@ -17,9 +17,27 @@
         label="Creacion"
         width="180"></el-table-column>
         <el-table-column
-        prop="name"
+        prop="nombre"
         label="Nombre"
         width="180"></el-table-column>
+        <el-table-column
+        prop="categoria"
+        label="Categoria"
+        width="100"></el-table-column>
+        <el-table-column
+        prop="descripcion"
+        label="Descripción"
+        width="180"></el-table-column>
+        <el-table-column
+        prop="cantidad"
+        label="Cantidad"
+        width="90"></el-table-column>
+        <el-table-column
+        prop="precio"
+        label="Precio"
+        width="100"></el-table-column>
+
+        
       </el-table>
       <nuxt-link to="/admin/productos/nuevo">
     <el-button type="primary" plain>Crea nuevo producto</el-button>

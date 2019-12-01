@@ -2,13 +2,15 @@ import JWTDecode from 'jwt-decode';
 import cookieparser from 'cookieparser';
 import {db} from '@/services/firebase';
 export const state = () => ({
-    products:[]
+    products:[],
+    pedido:[]
 }) 
 export const mutations={
-     SET_PRODUCTS(state, listproducts){
-         console.log("parce no se hace la mutation")
+    SET_PRODUCTS(state, listproducts){
         state.products= listproducts
-        console.log(state.products)
+    },
+    SET_PEDIDO(state, meal){
+        state.pedido.push(meal)
     }
 }
 export const actions={
@@ -28,17 +30,17 @@ export const actions={
             })
         }
         let listproducts=[]
-        let getproducts= await db.collection("productos").get().then(function(querySnapshot) {
+         await db.collection("productos").get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
                 // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
+                // console.log(doc.id, " => ", doc.data());
                 listproducts.push(doc.data());
             })
         })
-        
         commit("SET_PRODUCTS", listproducts)
-            
-
     },
+    addToOrder({commit},meal){
+        commit("SET_PEDIDO",meal)
+    }
     
 }

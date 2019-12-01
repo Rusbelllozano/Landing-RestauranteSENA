@@ -1,81 +1,48 @@
 <template>
 <div>  
     <div class="containfood">
-        <div class="cardmeal" v-for="(meal,index) in meals" :key="index">
-          <img :src='meal.img' alt="">
-          <el-dialog title="Informacion del producto" :visible.sync="dialogTableVisible">
-  <el-table :data="selectedMeal">
-    <el-table-column property="text" label="Nombre" width="150"></el-table-column> 
-  </el-table>
-  <!-- <img :src="selectedMeal[0].img" alt=""> -->
-  <el-checkbox v-model="checked">Opción</el-checkbox>
-</el-dialog>
-
+        <div class="cardmeal" v-for="(meal,index) in listproducts" :key="index">
+          <img :src='meal.linkimgpro' alt="">
+          
           <div class="info">
-            <p>{{meal.text}}</p>
-            <button @click="selectMeal(meal.text, meal.img)"> Comprar ahora</button>
+            <p>{{meal.nombre}}</p>
+            <button @click="selectMeal(meal)"> Comprar ahora</button>
           </div>
           
         </div>
     </div>
+    <el-dialog class="dialogMeal" title="Informacion del producto" :visible.sync="dialogTableVisible">
+            <div>
+              <h1>{{selectedMeal.nombre}}</h1>
+            <h2>{{selectedMeal.precio}}</h2>
+            <p>{{selectedMeal.descripcion}}</p>
+            </div>
+            <div>
+              <el-checkbox v-model="checked">Opción</el-checkbox>
+            </div>
+            <el-button type="success" @click="agregarproducto(selectedMeal)">Agregar al pedido<i class="el-icon-check el-icon-right"></i></el-button>
+    </el-dialog>
 </div>
     
 </template>
 
 <script>
 export default {
+  props:['listproducts'],
   methods:{
-    selectMeal(meal,mealimg){
+    agregarproducto(meal){
+        this.$store.dispatch('addToOrder',meal)
+    },
+    selectMeal(meal){
       this.dialogTableVisible = true
-      this.selectedMeal=[
-        {
-          text:meal,
-          img:mealimg
-        }
-      ]
-      
-      
+      this.selectedMeal=meal
     }
   },
     data () {
     return {
       dialogTableVisible: false,
       checked:false,
-      selectedMeal:[],
-      meals:[
-        {
-            img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-            text:"Salmon vegetable"
-        },
-        {
-            img:'https://images.pexels.com/photos/675951/pexels-photo-675951.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-            text:"Egg Eagle"
-        },
-        {
-            img:'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-            text:"Spaguetii Green"
-        },
-        {
-            img:'https://images.pexels.com/photos/46239/salmon-dish-food-meal-46239.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-            text:"Salmon Crush"
-        },
-        {
-            img:'https://images.pexels.com/photos/46239/salmon-dish-food-meal-46239.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-            text:"Salmon Sweety"
-        },
-        {
-            img:'https://images.pexels.com/photos/46239/salmon-dish-food-meal-46239.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-            text:"Salmon Salad"
-        },
-        {
-            img:'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-            text:"Spaguetii Green"
-        },
-        {
-            img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-            text:"Vegetable plus"
-        },
-      ]
+      selectedMeal:{},
       }
     }
   }
@@ -91,6 +58,10 @@ export default {
     max-width:1000px;
     justify-content:center;
     margin:0 auto;
+}
+.dialogMeal{
+  display:grid;
+  align-content: center;
 }
  .cardmeal{
         display: grid;

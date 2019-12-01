@@ -26,7 +26,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="Cantidad" prop="cantidad">
-        <el-input v-model="ruleForm.cantidad" placeholder="Ingrese la cantidad de producto"></el-input>
+        <el-input v-model="ruleForm.cantidad"  type="number" placeholder="Ingrese la cantidad de producto"></el-input>
       </el-form-item>
       <el-form-item label="Descripción" prop="descripcion">
         <el-input 
@@ -36,8 +36,9 @@
           v-model="ruleForm.descripcion">
         </el-input>
       </el-form-item>
-      <el-form-item label="Precio" prop="precio">
+      <el-form-item type="number" label="Precio" prop="precio">
         <el-input 
+          type="number" 
           placeholder="Ingresa el precio del producto"
           v-model="ruleForm.precio">
         </el-input>
@@ -59,7 +60,7 @@
           <el-input v-model="adicional.name" placeholder="Escribe un nombre del producto" ></el-input>
         </el-form-item>
         <el-form-item label="Precio">
-          <el-input 
+          <el-input type="number"
             placeholder="Ingresa el precio del producto"
             v-model="adicional.precio">
           </el-input>
@@ -115,7 +116,6 @@ export default {
       },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
-          console.log(valid)
           if (valid) {
             db.collection("productos").add({
               nombre:this.ruleForm.nombre,
@@ -126,13 +126,7 @@ export default {
               linkimgpro:"",
               adicionales:this.ruleForm.adicionales
           })
-          .then(function(docRef) {
-            
-              console.log("Document written with ID: ", docRef.id);
-          })
-          .catch(function(error) {
-              console.error("Error adding document: ", error);
-          });
+          console.log(this.ruleForm.precio)
             this.resetForm(formName)
             alert('submit!');
           } else {
