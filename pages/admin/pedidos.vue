@@ -10,35 +10,37 @@
       <div>
         <h1>Pedido Realizados</h1>
       <el-table
-    :data="tableData"
+    :data="listpedidos"
     style="width: 100%">
     <el-table-column
-      label="Date"
+      label="Productos"
       width="180">
       <template slot-scope="scope">
         <i class="el-icon-time"></i>
-        <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        <div v-for="(productos,index) in scope.row.productos" :key="index" >
+          <span style="margin-left: 10px">{{productos.nombre}}</span>
+        </div>
+        
       </template>
     </el-table-column>
     <el-table-column
-      label="Name"
+      label="Precio"
       width="180">
       <template slot-scope="scope">
         <el-popover trigger="hover" placement="top">
-          <p>Name: {{ scope.row.name }}</p>
-          <p>Addr: {{ scope.row.address }}</p>
+          <p>Ubicación: {{ scope.row.ubicacion }}</p>
           <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.name }}</el-tag>
+            <el-tag size="medium">{{ scope.row.costototal }}</el-tag>
           </div>
         </el-popover>
       </template>
     </el-table-column>
     <el-table-column
-      label="Operations" width="300">
+      label="Acciones" width="300">
       <template slot-scope="scope">
         <el-switch
           style="display: block"
-          v-model="value2"
+          v-model="scope.row.activo"
           active-color="#13ce66"
           inactive-color="#ff4949"
           active-text="Activo"
@@ -56,6 +58,11 @@
 import {auth } from "@/services/firebase";
 import Cookie from "js-cookie";
 export default {
+    computed:{
+      listpedidos(){
+        return this.$store.state.pedidos
+      }
+    },
     data() {
       return {
         value2:false,
