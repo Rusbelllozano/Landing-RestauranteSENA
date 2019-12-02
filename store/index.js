@@ -3,18 +3,22 @@ import cookieparser from 'cookieparser';
 import {db} from '@/services/firebase';
 export const state = () => ({
     products:[],
-    pedido:[]
+    pedidoActual:[],
+    pedidos:[]
 }) 
 export const mutations={
     SET_PRODUCTS(state, listproducts){
         console.log("si se hizo la asignacion de productos")
         state.products= listproducts
     },
-    SET_PEDIDO(state, meal){
-        state.pedido.push(meal)
+    SET_PEDIDOACTUAL(state, meal){
+        state.pedidoActual.push(meal)
     },
     UPDATE_PEDIDO(state,newValue){
-        state.pedido = newValue
+        state.pedidoActual = newValue
+    },
+    SET_PEDIDOS(state,listpedidos){
+        state.pedidos=listpedidos
     }
 }
 export const actions={
@@ -28,6 +32,15 @@ export const actions={
             })
         })
         commit("SET_PRODUCTS", listproducts)
+        let listpedidos=[]
+         await db.collection("pedidos").get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                listpedidos.push(doc.data());
+            })
+        })
+        commit("SET_PEDIDOS", listpedidos)
         if(process.server && process.static) return;
         if(!req.headers.cookie) return;
         const parsed = cookieparser.parse(req.headers.cookie)
@@ -45,7 +58,7 @@ export const actions={
         
     },
     addToOrder({commit},meal){
-        commit("SET_PEDIDO",meal)
+        commit("SET_PEDIDOACTUAL",meal)
     }
     
 }

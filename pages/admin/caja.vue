@@ -5,10 +5,10 @@
   <el-button type="primary">Primary</el-button>
       <h1>Pedido Realizados</h1>
       <el-table
-    :data="tableData"
+    :data="listpedidos"
     style="width: 100%">
     <el-table-column
-      label="Date"
+      label="Fecha de Creación"
       width="180">
       <template slot-scope="scope">
         <i class="el-icon-time"></i>
@@ -16,14 +16,13 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="Name"
+      label="Valor a Pagar"
       width="180">
       <template slot-scope="scope">
         <el-popover trigger="hover" placement="top">
-          <p>Name: {{ scope.row.name }}</p>
-          <p>Addr: {{ scope.row.address }}</p>
+          <p>Ubicación: {{ scope.row.ubicacion}}</p>
           <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.name }}</el-tag>
+            <el-tag size="medium">{{ scope.row.costototal}}</el-tag>
           </div>
         </el-popover>
       </template>
@@ -48,25 +47,13 @@
 
 <script>
 export default {
+  computed:{
+    listpedidos(){
+      return this.$store.state.pedidos
+    }
+  },
     data() {
       return {
-        tableData: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }]
       }}
 }
 </script>
