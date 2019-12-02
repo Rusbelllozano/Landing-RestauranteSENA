@@ -50,10 +50,12 @@
           <div v-for="(pedido,index) in pedidoActual" :key="index">
             <div>
               {{index+1}}
-            {{pedido.nombre}}
-            {{pedido.precio}}
+              {{pedido.nombre}}
+              ${{pedido.precio}}
             </div>
-            
+            <div>
+              <el-button type="danger" @click="cancelarComida(index)" icon="el-icon-delete" circle></el-button>
+            </div>
           </div>
             <el-button type="success" @click="confirmarOrden(pedidoActual)">Confirmar Orden<i class="el-icon-check el-icon-right"></i></el-button>
     </el-dialog>
@@ -78,6 +80,9 @@ export default {
     cardmeals
   },
   methods:{
+     async cancelarComida(index){
+     await this.pedidoActual.splice(index,1)
+    },
     confirmarOrden(pedidoActual){
       // let costototal
       // for (let index = 0; index < pedidoActual.length; index++) {
@@ -104,9 +109,16 @@ export default {
     listproductsActivos(){
       return this.$store.state.products.filter(product => product.cantidad > 0)
     },
-    pedidoActual(){
+    pedidoActual: {
+    // getter
+    get: function () {
       return this.$store.state.pedido
+    },
+    // setter
+    set:function (newValue) {
+       this.$store.commit("UPDATE_PEDIDO",newValue)
     }
+  }
   }
 
 }

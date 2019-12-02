@@ -14,7 +14,8 @@
     <el-dialog class="dialogMeal" title="Informacion del producto" :visible.sync="dialogTableVisible">
             <div>
               <h1>{{selectedMeal.nombre}}</h1>
-            <h2>{{selectedMeal.precio}}</h2>
+              <img class="imgselect" :src='selectedMeal.linkimgpro' alt="">
+            <h2>${{selectedMeal.precio}}</h2>
             <p>{{selectedMeal.descripcion}}</p>
             </div>
             <div>
@@ -50,7 +51,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .containfood{
     display:grid;
     grid-template-columns: repeat(4,auto);
@@ -59,9 +59,17 @@ export default {
     justify-content:center;
     margin:0 auto;
 }
+.el-dialog{
+  margin:0 auto;
+}
 .dialogMeal{
   display:grid;
   align-content: center;
+  justify-items: center;
+  // justify-content: center;
+  .imgselect{
+    max-width: 500px;
+  }
 }
  .cardmeal{
         display: grid;
