@@ -19,6 +19,9 @@ export const mutations={
     },
     SET_PEDIDOS(state,listpedidos){
         state.pedidos=listpedidos
+    },
+    DELETE_MEAL(state,index){
+        state.pedidoActual.splice(index,1)
     }
 }
 export const actions={
@@ -59,6 +62,9 @@ export const actions={
     },
     addToOrder({commit},meal){
         commit("SET_PEDIDOACTUAL",meal)
+    },
+    deleteMeal({commit}, index){
+        commit("DELETE_MEAL",index)
     }
     
 }

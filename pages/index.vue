@@ -46,11 +46,13 @@
     <section class="food">
       <cardmeals/>
     </section>
-    <section class="chef">
+    <section id="chef" class="chef">
       <div class="infoSENA">
-        <p>
-          El SENA cuenta con un programa en Cocina que ofrece los servicios de almuerzo a los instructores, administrativos y aprendices 
-        </p>
+        <iframe width="650" height="400" 
+        src="https://www.youtube.com/embed/GOdv9rR-G5U" 
+        frameborder="0" allow="accelerometer; autoplay; 
+        encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
       </div>
     </section>
 
@@ -86,11 +88,11 @@ header{
   z-index: 999999;
   background-color: #fff;
   #logo{
-    margin:5px 0px 5px 50px;
+    margin:10px 0px 6px 30px;
     float:left;
     img{
       height: 40px;
-      width: 100px;
+      width: 85px;
     }
   }
    #navmenuR{
@@ -183,9 +185,6 @@ header{
       justify-content: center;
       align-content: center;
       .infoSENA{
-        background-color:red;
-        width: 500px;
-        height: 500px;
         display: grid;
       justify-content: center;
       align-content: center;

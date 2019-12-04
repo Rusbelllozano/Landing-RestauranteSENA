@@ -1,10 +1,13 @@
 <template>
 <div>
   <div class="containfood">
-        <div class="cardmeal" v-for="(meal,index) in meals" :key="index">
-          <img :src='meal.img' alt="">
-          <p>{{meal.text}}</p>
-          <button> Comprar ahora</button>
+    
+        <div class="cardmeal" v-for="(meal,index) in listproducts" :key="index">
+          <img :src='meal.linkimgpro' alt="">
+          <p>{{meal.nombre}}</p>
+          <nuxt-link to="/menu">
+            <button> Comprar ahora</button>
+          </nuxt-link>
         </div>
     </div>
 
@@ -14,6 +17,11 @@
 
 <script>
 export default {
+  computed:{
+    listproducts(){
+      return this.$store.state.products.filter(product => product.cantidad > 0 && product.categoria === "Plato fuerte").slice(0,4)
+    }
+  },
     data () {
     return {
       meals:[

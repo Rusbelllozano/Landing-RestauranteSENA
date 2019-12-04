@@ -27,7 +27,7 @@
            Plato Fuerte
         </li>
           </nuxt-link>
-         <nuxt-link to="/menu/entradas">
+         <nuxt-link no-prefetch to="/menu/entradas">
           <li>
             Entradas
           </li>
@@ -47,17 +47,37 @@
       </div>
     </header>
     <el-dialog class="dialogOrder" title="Informacion de la Orden" :visible.sync="dialogTableVisible">
-          <div v-for="(pedido,index) in pedidoActual" :key="index">
-            <div>
-              {{index+1}}
-              {{pedido.nombre}}
-              ${{pedido.precio}}
+          <div v-if="!pedidoActual.length">
+            <h2>No tiene ningun plato seleccionado</h2>
+          </div>
+          <div v-else>
+            <div class=""  v-for="(pedido,index) in pedidoActual" :key="index">
+              <div>
+                {{index+1}}
+                {{pedido.nombre}}
+                ${{pedido.precio}}
+              </div>
+              <div>
+                <el-button type="danger" @click="cancelarComida(index)" icon="el-icon-delete" circle></el-button>
+              </div>
             </div>
             <div>
-              <el-button type="danger" @click="cancelarComida(index)" icon="el-icon-delete" circle></el-button>
+              <p>Ingrese su nombre y su numero de cedula</p>
+              <el-input type="text"
+                placeholder="Nombre-12314566"
+                v-model="id">
+              </el-input>
+              <p>Ingrese el lugar donde quiere que llegue el pedido</p>
+              <el-input type="text"
+                placeholder="Ingresa el lugar"
+                v-model="ubicacion">
+              </el-input>
+              <el-button type="success" @click="confirmarOrden(pedidoActual)">Confirmar Orden<i class="el-icon-check el-icon-right"></i></el-button>
             </div>
           </div>
-            <el-button type="success" @click="confirmarOrden(pedidoActual)">Confirmar Orden<i class="el-icon-check el-icon-right"></i></el-button>
+          
+            
+            
     </el-dialog>
     <div class="food">
       <cardmeals :listproducts="listproductsActivos"/>
@@ -73,15 +93,17 @@ export default {
    data: function () {
     return {
       showmenu:true,
-      dialogTableVisible:false
+      dialogTableVisible:false,
+      ubicacion:"",
+      id:""
     }
   },
   components: {
     cardmeals
   },
   methods:{
-     async cancelarComida(index){
-     await this.pedidoActual.splice(index,1)
+     cancelarComida(index){
+     this.$store.dispatch('deleteMeal',index)
     },
     confirmarOrden(pedidoActual){
       // let costototal
@@ -92,32 +114,26 @@ export default {
       // alert(costototal)
       db.collection("pedidos").add({
               costototal:pedidoActual[0].precio,
-              idpedido:0,
               productos:pedidoActual,
-              ubicacion:"mesa2"
+              ubicacion:this.ubicacion,
+              id:this.id
           })
           .then(function(docRef) {
-            
+            this.dialogTableVisible=false
               console.log("Document written with ID: ", docRef.id);
           })
           .catch(function(error) {
               console.error("Error adding document: ", error);
           });
+      
     }
   },
   computed:{
     listproductsActivos(){
       return this.$store.state.products.filter(product => product.cantidad > 0)
     },
-    pedidoActual: {
-    // getter
-    get: function () {
-      return this.$store.state.pedido
-    },
-    // setter
-    set:function (newValue) {
-       this.$store.commit("UPDATE_PEDIDO",newValue)
-    }
+    pedidoActual(){
+      return this.$store.state.pedidoActual
   }
   }
 
@@ -136,11 +152,11 @@ header{
   z-index: 999999;
   background-color: #fff;
   #logo{
-    margin:5px 0px 5px 50px;
+    margin:10px 0px 6px 30px;
     float:left;
     img{
       height: 40px;
-      width: 100px;
+      width: 85px;
     }
   }
   #navmenuR{

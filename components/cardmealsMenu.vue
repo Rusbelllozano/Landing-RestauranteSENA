@@ -1,7 +1,7 @@
 <template>
 <div>  
     <div class="containfood">
-        <div class="cardmeal" v-for="(meal,index) in listproducts" :key="index">
+        <div class="cardmeal" v-for="(meal,index) in listproductsFilter" :key="index">
           <img :src='meal.linkimgpro' alt="">
           
           <div class="info">
@@ -19,7 +19,7 @@
             <p>{{selectedMeal.descripcion}}</p>
             </div>
             <div>
-              <el-checkbox v-model="checked">Opción</el-checkbox>
+              <!-- <el-checkbox v-model="checked">Opción</el-checkbox> -->
             </div>
             <el-button type="success" @click="agregarproducto(selectedMeal)">Agregar al pedido<i class="el-icon-check el-icon-right"></i></el-button>
     </el-dialog>
@@ -30,9 +30,19 @@
 <script>
 export default {
   props:['listproducts'],
+  computed:{
+    listproductsFilter(){
+      if(this.$route.path === "/menu"){
+        return this.listproducts.filter(product => product.categoria === "Plato fuerte")
+      }else if(this.$route.path === "/menu/entradas"){
+        return this.listproducts.filter(product => product.categoria === "Entradas")
+      }
+    }
+  },
   methods:{
     agregarproducto(meal){
         this.$store.dispatch('addToOrder',meal)
+        this.dialogTableVisible= false
     },
     selectMeal(meal){
       this.dialogTableVisible = true

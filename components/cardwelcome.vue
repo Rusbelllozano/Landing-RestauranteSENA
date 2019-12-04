@@ -1,10 +1,11 @@
 <template>
     <div>
         <div class="cardwelcome">
-          <h1>Escuela de Gastronomia CISM</h1>
-          <!-- <h2>Cocina de alta calidad</h2> -->
-          <p>Cocina de alta calidad a un precio accesible</p>
-          <button> Conoce más</button>
+          <h1>Escuela de Gastronomia y Turismo del Meta</h1>
+          <a href="#chef">
+            <button>Conoce más</button>
+          </a>
+          
         </div>
     </div>
 </template>
@@ -27,13 +28,8 @@ export default {
         h1{
           text-align:center;
           font-family: 'Reenie Beanie', cursive;
-          font-size:100px;
+          font-size:65px;
           margin-bottom:0px;
-        }
-        p{
-          padding: 0px 0px 15px 20px;
-          font-family: 'Montserrat', sans-serif;
-          font-size:1.5em;
         }
         button{
           color:#fff;
