@@ -1,6 +1,6 @@
 <template>
   <div class="admin">
-      <h1>Pedido Realizados</h1>
+      <h1>Pedidos a Pagar</h1>
       <el-table
     :data="listpedidos"
     style="width: 100%">
@@ -27,7 +27,7 @@
         <el-popover trigger="hover" placement="top">
           <p>Ubicación: {{ scope.row.ubicacion}}</p>
           <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.costototal}}</el-tag>
+            <el-tag size="medium">${{scope.row.costototal}}</el-tag>
           </div>
         </el-popover>
       </template>
@@ -52,7 +52,7 @@ export default {
     
     pagarPedido(pedido){
       if(pedido.despachado){
-        db.collection('pedidos').doc(id).update({pagado: true}).then(function(){
+        db.collection('pedidos').doc(pedido.idfirebase).update({pagado: true}).then(function(){
         alert("Se ha registrado el pago del pedido")
         location.reload();
       })
@@ -64,7 +64,7 @@ export default {
   },
   computed:{
     listpedidos(){
-      return this.$store.state.pedidos
+      return this.$store.state.pedidos.filter(pedido => pedido.despachado)
     }
   },
     data() {

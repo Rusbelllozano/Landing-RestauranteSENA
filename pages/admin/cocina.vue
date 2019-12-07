@@ -24,35 +24,20 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="ID Mesa"
-      width="100"
-      prop="address">
-    </el-table-column>
-    <el-table-column
       label="Pedido"
-      width="180"
-      prop="producto">
-    </el-table-column>
-    <el-table-column
-      label="Adicionales"
       width="180"
       prop="producto">
     </el-table-column>
     <el-table-column
       label="Operations">
       <template slot-scope="scope">
-        <el-button
-          size="mini"
-          @click="handleEdit(scope.$index, scope.row)">Despachar</el-button>
-        <el-button
-          size="mini"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)">Recibido</el-button>
+        <el-button v-if="!scope.row.despachado"
+          size="mini" type="danger"
+          @click="despacharPedido(scope.row.idfirebase)">Despachar</el-button>
+          <p v-else>Ya fue despachado</p>
       </template>
     </el-table-column>
-  </el-table>
-  <el-button type="success">Guardar cambios</el-button>
-  
+  </el-table>  
   </div>
 </template>
 
@@ -64,7 +49,12 @@ export default {
         
       }},
       methods:{
-
+        despacharPedido(idpedido){
+          db.collection('pedidos').doc(idpedido).update({despachado: true}).then(function(){
+        alert("Se ha registrado el despacho del pedido")
+        location.reload();
+      })
+        }
       },
       computed:{
         listpedidospordespachar(){
