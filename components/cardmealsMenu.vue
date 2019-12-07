@@ -36,6 +36,8 @@ export default {
         return this.listproducts.filter(product => product.categoria === "Plato fuerte")
       }else if(this.$route.path === "/menu/entradas"){
         return this.listproducts.filter(product => product.categoria === "Entradas")
+      }else if(this.$route.path === "/menu/bebidas"){
+        return this.listproducts.filter(product => product.categoria === "Bebidas")
       }
     }
   },
