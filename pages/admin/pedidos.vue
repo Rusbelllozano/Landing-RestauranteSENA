@@ -7,6 +7,14 @@
     <nuxt-link to="/admin/productos">
     <el-button type="primary">Productos</el-button>
     </nuxt-link> 
+    <div class="redireccion">
+      <nuxt-link to="/admin/caja">
+    <el-button type="primary" plain>Caja</el-button>
+    </nuxt-link>
+    <nuxt-link to="/admin/cocina">
+    <el-button type="primary" plain>Cocina</el-button>
+    </nuxt-link>
+    </div>
       <div>
         <h1>Pedido Realizados</h1>
       <el-table
@@ -38,18 +46,13 @@
     <el-table-column
       label="Acciones" width="300">
       <template slot-scope="scope">
-        <el-switch
-          style="display: block"
-          v-model="scope.row.activo"
-          active-color="#13ce66"
-          inactive-color="#ff4949"
-          active-text="Activo"
-          inactive-text="Cancelado">
-        </el-switch>
+        <p v-if="scope.row.pagado">Pagado</p>
+        <p v-else>A pagar</p>
+        <p v-if="scope.row.despachado">Despachado</p>
+        <p v-else>Falta despachar</p>
       </template>
     </el-table-column>
   </el-table>
-  <el-button type="success">Success</el-button>
       </div>
   </div>
 </template>
@@ -65,25 +68,7 @@ export default {
     },
     data() {
       return {
-        value2:false,
-        tableData: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-          activo:true
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }]
+        
       }},
       methods:{
         async logout(){
@@ -98,5 +83,11 @@ export default {
 <style scoped>
 .admin{
     padding: 100px;
+}
+.redireccion{
+  right: 0;
+  top:0;
+  margin: 10px 5px;
+  position: absolute;
 }
 </style>

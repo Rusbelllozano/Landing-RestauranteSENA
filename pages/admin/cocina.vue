@@ -1,22 +1,27 @@
 <template>
   <div class="cocina">
       
-      <h1>Pedido Realizados</h1>
+      <h1>Pedido por despachar</h1>
       <el-table
-    :data="tableData"
+    :data="listpedidospordespachar"
     style="width: 100%">
     <el-table-column
       label="Date"
       width="180">
       <template slot-scope="scope">
         <i class="el-icon-time"></i>
-        <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        <span style="margin-left: 10px">{{ scope.row.fecha }}</span>
       </template>
     </el-table-column>
     <el-table-column
       label="Name"
       width="180"
       prop="name">
+      <template slot-scope="scope">
+        <div v-for="(producto,index) in scope.row.productos" :key="index">
+          {{producto.nombre}}
+        </div>
+      </template>
     </el-table-column>
     <el-table-column
       label="ID Mesa"
@@ -38,7 +43,7 @@
       <template slot-scope="scope">
         <el-button
           size="mini"
-          @click="handleEdit(scope.$index, scope.row)">Pagado</el-button>
+          @click="handleEdit(scope.$index, scope.row)">Despachar</el-button>
         <el-button
           size="mini"
           type="danger"
@@ -52,31 +57,20 @@
 </template>
 
 <script>
+import {db} from "@/services/firebase.js"
 export default {
     data() {
       return {
-        tableData: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 189',
-          producto:"pollo"
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189',
-          producto:"pollo"
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          address: 'No. 189',
-          producto:"pollo"
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          address: 'No. 189',
-          producto:"pollo"
-        }]
-      }}
+        
+      }},
+      methods:{
+
+      },
+      computed:{
+        listpedidospordespachar(){
+          return this.$store.state.pedidos.filter(pedido => !pedido.despachado)
+        }
+      }
 }
 </script>
 

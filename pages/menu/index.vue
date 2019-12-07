@@ -42,16 +42,16 @@
           Servicios
           </li>
         </nuxt-link>
-        <li class="carrito" @click="dialogTableVisible=true">Orden</li>
+        <li class="carrito" @click="paso1=true">Orden</li>
       </ul>
       </div>
     </header>
-    <el-dialog class="dialogOrder" title="Informacion de la Orden" :visible.sync="dialogTableVisible">
+    <el-dialog class="dialogOrder" title="Informacion de la Orden" :visible.sync="paso1">
           <div v-if="!pedidoActual.length">
             <h2>No tiene ningun plato seleccionado</h2>
           </div>
           <div v-else>
-            <div class=""  v-for="(pedido,index) in pedidoActual" :key="index">
+            <div class="producto"  v-for="(pedido,index) in pedidoActual" :key="index">
               <div>
                 {{index+1}}
                 {{pedido.nombre}}
@@ -62,6 +62,14 @@
               </div>
             </div>
             <div>
+              <h2>Costo Total</h2>
+              <h3>${{costototal}}</h3>
+            </div>
+            <el-button type="success" @click="confirmarPaso1()">Siguiente Paso<i class="el-icon-check el-icon-right"></i></el-button>
+          </div>
+    </el-dialog>
+    <el-dialog class="dialogOrder" title="Informacion de la Orden" :visible.sync="paso2">
+         <div>
               <p>Ingrese su nombre y su numero de cedula</p>
               <el-input type="text"
                 placeholder="Nombre-12314566"
@@ -73,12 +81,9 @@
                 v-model="ubicacion">
               </el-input>
               <el-button type="success" @click="confirmarOrden(pedidoActual)">Confirmar Orden<i class="el-icon-check el-icon-right"></i></el-button>
-            </div>
-          </div>
-          
-            
-            
+            </div> 
     </el-dialog>
+    
     <div class="food">
       <cardmeals :listproducts="listproductsActivos"/>
     </div>
@@ -93,7 +98,8 @@ export default {
    data: function () {
     return {
       showmenu:true,
-      dialogTableVisible:false,
+      paso1:false,
+      paso2:false,
       ubicacion:"",
       id:""
     }
@@ -105,32 +111,42 @@ export default {
      cancelarComida(index){
      this.$store.dispatch('deleteMeal',index)
     },
+    confirmarPaso1(){
+      this.paso1=false
+      this.paso2=true
+    },
     confirmarOrden(pedidoActual){
-      // let costototal
-      // for (let index = 0; index < pedidoActual.length; index++) {
-      //   costototal=costototal+ pedidoActual[index].precio;
-        
-      // }
-      // alert(costototal)
+      
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date+' '+time;
       db.collection("pedidos").add({
               costototal:pedidoActual[0].precio,
               productos:pedidoActual,
               ubicacion:this.ubicacion,
-              id:this.id
+              id:this.id,
+              fecha:dateTime,
+              pagado:false,
+              despachado:false
           })
           .then(function(docRef) {
-            this.dialogTableVisible=false
-              console.log("Document written with ID: ", docRef.id);
+            alert("Pedido creado")
+            
           })
-          .catch(function(error) {
-              console.error("Error adding document: ", error);
-          });
-      
+        this.paso2= false
     }
   },
   computed:{
     listproductsActivos(){
       return this.$store.state.products.filter(product => product.cantidad > 0)
+    },
+    costototal(){
+      let costofinal= 0;
+      for (let index = 0; index < this.pedidoActual.length; index++) {
+        costofinal=costofinal+ parseInt(this.pedidoActual[index].precio);
+      }
+      return costofinal
     },
     pedidoActual(){
       return this.$store.state.pedidoActual
@@ -144,6 +160,11 @@ export default {
 .dialogOrder{
   display: grid;
   align-content: center;
+}
+.producto{
+display: flex;
+flex-direction: row;
+align-items: center;
 }
 header{
   height: 60px;

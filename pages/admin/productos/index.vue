@@ -12,10 +12,6 @@
         <el-table
       :data="tableDataproductos"
       style="width: 100%">
-      <el-table-column
-        prop="date"
-        label="Creacion"
-        width="180"></el-table-column>
         <el-table-column
         prop="nombre"
         label="Nombre"

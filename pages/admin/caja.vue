@@ -1,8 +1,5 @@
 <template>
   <div class="admin">
-      <el-button type="primary">Primary</el-button>
-  <el-button type="primary">Primary</el-button>
-  <el-button type="primary">Primary</el-button>
       <h1>Pedido Realizados</h1>
       <el-table
     :data="listpedidos"
@@ -12,7 +9,15 @@
       width="180">
       <template slot-scope="scope">
         <i class="el-icon-time"></i>
-        <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        <span style="margin-left: 10px">{{ scope.row.fecha }}</span>
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="Id-Cliente"
+      width="180">
+      <template slot-scope="scope">
+        <i class="el-icon-user"></i>
+        <span style="margin-left: 10px">{{ scope.row.id }}</span>
       </template>
     </el-table-column>
     <el-table-column
@@ -30,23 +35,33 @@
     <el-table-column
       label="Operations">
       <template slot-scope="scope">
-        <el-button
+        <el-button v-if="!scope.row.pagado"
           size="mini"
-          @click="handleEdit(scope.$index, scope.row)">Pagado</el-button>
-        <el-button
-          size="mini"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)">Recibido</el-button>
+          @click="pagarPedido(scope.row)" plain type="danger">Pagar</el-button>
+        <p v-else>Pagado</p>
       </template>
     </el-table-column>
-  </el-table>
-  <el-button type="success">Success</el-button>
-  
+  </el-table>  
   </div>
 </template>
 
 <script>
+import {db} from "@/services/firebase.js"
 export default {
+  methods:{
+    
+    pagarPedido(pedido){
+      if(pedido.despachado){
+        db.collection('pedidos').doc(id).update({pagado: true}).then(function(){
+        alert("Se ha registrado el pago del pedido")
+        location.reload();
+      })
+      }else{
+        alert("El pedido no ha sido despachado")
+      }
+      
+    }
+  },
   computed:{
     listpedidos(){
       return this.$store.state.pedidos

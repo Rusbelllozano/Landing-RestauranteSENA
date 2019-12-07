@@ -31,16 +31,15 @@ export const actions={
             querySnapshot.forEach(function(doc) {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
-                listproducts.push(doc.data());
+                listproducts.push(Object.assign({}, doc.data(), { id: doc.id}))
             })
         })
         commit("SET_PRODUCTS", listproducts)
         let listpedidos=[]
          await db.collection("pedidos").get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
-                // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
-                listpedidos.push(doc.data());
+                listpedidos.push(Object.assign({}, doc.data(), { idfirebase: doc.id}))
             })
         })
         commit("SET_PEDIDOS", listpedidos)
