@@ -95,6 +95,15 @@ import {db} from "@/services/firebase";
 import cardmeals from '~/components/cardmealsMenu.vue'
 import { format } from 'path'
 export default {
+  head () {
+    return {
+      title: " Carta - Escuela de Gastronomia y Turismo ",
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        { hid: 'description', name: 'description', content: 'Restaurante de la escuela de gastronomia' }
+      ]
+    }
+  },
    data: function () {
     return {
       showmenu:true,

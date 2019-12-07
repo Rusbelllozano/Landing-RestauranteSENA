@@ -63,6 +63,15 @@
 import cardwelcome from '~/components/cardwelcome.vue'
 import cardmeals from '~/components/cardmealsLanding.vue'
 export default {
+  head () {
+    return {
+      title: "Escuela de Gastronomia y Turismo",
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        { hid: 'description', name: 'description', content: 'Restaurante de la escuela de gastronomia' }
+      ]
+    }
+  },
   created(){
   },
    data: function () {
