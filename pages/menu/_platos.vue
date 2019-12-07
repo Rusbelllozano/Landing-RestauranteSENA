@@ -256,7 +256,7 @@ header{
     
 }
 .food{
-      height:100vh;
+      // height:100vh;
       background-color:#b59f95;
       padding:50px;
           }

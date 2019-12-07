@@ -4,17 +4,21 @@
     <el-button type="primary">Volver</el-button>
   </nuxt-link>
   <h1>Nuevo producto</h1>
-    <el-upload
+    <!-- <el-upload
     action="https://jsonplaceholder.typicode.com/posts/"
     list-type="picture-card"
     :on-preview="handlePictureCardPreview"
     :on-remove="handleRemove">
     <i class="el-icon-plus"></i>
-    </el-upload>
+    </el-upload> -->
+<!-- 
     <el-dialog :visible.sync="dialogVisible">
-      <img width="100%" :src="dialogImageUrl" alt="">
-    </el-dialog>
+      <img width="100%" :src="ruleForm.linkimgpro" alt="">
+    </el-dialog> -->
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+      <el-form-item label="Imagen" prop="linkimgpro">
+        <el-input v-model="ruleForm.linkimgpro" placeholder="Ingrese la url de la imagen"></el-input>
+      </el-form-item>
       <el-form-item label="Nombre" prop="nombre">
         <el-input v-model="ruleForm.nombre" placeholder="Escribe un nombre del producto"></el-input>
       </el-form-item>
@@ -123,7 +127,7 @@ export default {
               descripcion:this.ruleForm.descripcion,
               cantidad:this.ruleForm.cantidad,
               categoria:this.ruleForm.categoria,
-              linkimgpro:"",
+              linkimgpro:this.ruleForm.linkimgpro,
               adicionales:this.ruleForm.adicionales
           })
           console.log(this.ruleForm.precio)
