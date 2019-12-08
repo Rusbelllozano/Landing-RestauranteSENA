@@ -21,14 +21,19 @@
     :data="listpedidos"
     style="width: 100%">
     <el-table-column
+      label="Id cliente"
+      width="180">
+      <template slot-scope="scope">
+          <span style="margin-left: 10px">{{scope.row.id}}</span>
+      </template>
+    </el-table-column>
+    <el-table-column
       label="Productos"
       width="180">
       <template slot-scope="scope">
-        <i class="el-icon-time"></i>
         <div v-for="(productos,index) in scope.row.productos" :key="index" >
           <span style="margin-left: 10px">{{productos.nombre}}</span>
         </div>
-        
       </template>
     </el-table-column>
     <el-table-column
@@ -38,7 +43,7 @@
         <el-popover trigger="hover" placement="top">
           <p>Ubicación: {{ scope.row.ubicacion }}</p>
           <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.costototal }}</el-tag>
+            <el-tag size="medium">${{scope.row.costototal }}</el-tag>
           </div>
         </el-popover>
       </template>
