@@ -5,12 +5,11 @@
           <a href="#chef">
             <button>Conoce más</button>
           </a>
-          
         </div>
     </div>
 </template>
 
-<script >
+<script>
 export default {
 
 }

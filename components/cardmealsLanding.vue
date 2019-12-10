@@ -1,7 +1,6 @@
 <template>
 <div>
   <div class="containfood">
-    
         <div class="cardmeal" v-for="(meal,index) in listproducts" :key="index">
           <img :src='meal.linkimgpro' alt="">
           <p>{{meal.nombre}}</p>
@@ -10,9 +9,7 @@
           </nuxt-link>
         </div>
     </div>
-
 </div>
-    
 </template>
 
 <script>
@@ -22,30 +19,7 @@ export default {
       return this.$store.state.products.filter(product => product.cantidad > 0 && product.categoria === "Plato fuerte").slice(0,4)
     }
   },
-    data () {
-    return {
-      meals:[
-        {
-            img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-            text:"Salmon vegetable"
-        },
-        {
-            img:'https://images.pexels.com/photos/675951/pexels-photo-675951.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-            text:"Egg Eagle"
-        },
-        {
-            img:'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-            text:"Spaguetii Green"
-        },
-        {
-            img:'https://images.pexels.com/photos/46239/salmon-dish-food-meal-46239.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-            text:"Salmon Salad"
-        },
-      ]
-      }
-    }
-  }
-
+}
 </script>
 
 <style lang="scss" scoped>

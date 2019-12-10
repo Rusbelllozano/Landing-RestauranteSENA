@@ -53,6 +53,12 @@
         frameborder="0" allow="accelerometer; autoplay; 
         encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
         </iframe>
+        <div class="develop">
+         <h2>Desarrollado por Rusbell Lozano</h2>
+         <h2>Presentado a Ing. Carolina Quevedo</h2>
+         <h3>Analisis y Desarrollo de sistemas de información</h3>
+         <p>Proyecto final - etapa lectiva</p>
+        </div>
       </div>
     </section>
 
@@ -72,9 +78,7 @@ export default {
       ]
     }
   },
-  created(){
-  },
-   data: function () {
+  data: function () {
     return {
       showmenu:false
     }
@@ -83,9 +87,6 @@ export default {
     cardwelcome,
     cardmeals
   },
-  methods:{
-
-  }
 }
 </script>
 <style lang="scss" scoped>
@@ -195,16 +196,20 @@ header{
       align-content: center;
       .infoSENA{
         display: grid;
-      justify-content: center;
-      align-content: center;
-      p{
-        padding: 20px;
-      }
+        justify-content: center;
+        align-content: center;
+        .develop{
+          display:grid;
+          justify-content:center;
+          text-align:center;
+        }
+        p{
+          padding: 20px;
+        }
       }
     }
     
 }
-
 section{
     padding: 3em;
     height: 100vh;

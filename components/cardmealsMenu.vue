@@ -3,28 +3,25 @@
     <div class="containfood">
         <div class="cardmeal" v-for="(meal,index) in listproductsFilter" :key="index">
           <img :src='meal.linkimgpro' alt="">
-          
           <div class="info">
             <p>{{meal.nombre}}</p>
             <button @click="selectMeal(meal)"> Comprar ahora</button>
           </div>
-          
         </div>
     </div>
     <el-dialog class="dialogMeal" title="Informacion del producto" :visible.sync="dialogTableVisible">
             <div>
               <h1>{{selectedMeal.nombre}}</h1>
               <img class="imgselect" :src='selectedMeal.linkimgpro' alt="">
-            <h2>${{selectedMeal.precio}}</h2>
-            <p>{{selectedMeal.descripcion}}</p>
+              <h2>${{selectedMeal.precio}}</h2>
+              <p>{{selectedMeal.descripcion}}</p>
             </div>
-            <div>
-              <!-- <el-checkbox v-model="checked">Opción</el-checkbox> -->
-            </div>
-            <el-button type="success" @click="agregarproducto(selectedMeal)">Agregar al pedido<i class="el-icon-check el-icon-right"></i></el-button>
+            <el-button type="success" @click="agregarproducto(selectedMeal)">
+              Agregar al pedido
+              <i class="el-icon-check el-icon-right"></i>
+            </el-button>
     </el-dialog>
 </div>
-    
 </template>
 
 <script>
