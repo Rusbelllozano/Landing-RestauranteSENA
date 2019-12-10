@@ -4,7 +4,8 @@ import {db} from '@/services/firebase';
 export const state = () => ({
     products:[],
     pedidoActual:[],
-    pedidos:[]
+    pedidos:[],
+    editproducto:{}
 }) 
 export const mutations={
     SET_PRODUCTS(state, listproducts){
@@ -20,6 +21,9 @@ export const mutations={
     SET_PEDIDOS(state,listpedidos){
         state.pedidos=listpedidos
     },
+    SET_EDITARPRODUCTO(state,editproduct){
+        state.editproducto=editproduct
+    },
     DELETE_MEAL(state,index){
         state.pedidoActual.splice(index,1)
     }
@@ -29,8 +33,6 @@ export const actions={
         let listproducts=[]
          await db.collection("productos").get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
-                // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
                 listproducts.push(Object.assign({}, doc.data(), { id: doc.id}))
             })
         })
@@ -38,7 +40,6 @@ export const actions={
         let listpedidos=[]
          await db.collection("pedidos").get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
-                console.log(doc.id, " => ", doc.data());
                 listpedidos.push(Object.assign({}, doc.data(), { idfirebase: doc.id}))
             })
         })
@@ -51,7 +52,6 @@ export const actions={
 
         const decoded= JWTDecode(accessTokenCookie);
         if(decoded){
-            console.log(decoded)
             commit("users/SET_USER", {
                 uid: decoded.user_id,
                 email:decoded.email
