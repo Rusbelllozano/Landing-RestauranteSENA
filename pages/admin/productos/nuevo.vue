@@ -4,17 +4,6 @@
     <el-button type="primary">Volver</el-button>
   </nuxt-link>
   <h1>Nuevo producto</h1>
-    <!-- <el-upload
-    action="https://jsonplaceholder.typicode.com/posts/"
-    list-type="picture-card"
-    :on-preview="handlePictureCardPreview"
-    :on-remove="handleRemove">
-    <i class="el-icon-plus"></i>
-    </el-upload> -->
-<!-- 
-    <el-dialog :visible.sync="dialogVisible">
-      <img width="100%" :src="ruleForm.linkimgpro" alt="">
-    </el-dialog> -->
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
       <el-form-item label="Imagen" prop="linkimgpro">
         <el-input v-model="ruleForm.linkimgpro" placeholder="Ingrese la url de la imagen"></el-input>
@@ -47,31 +36,31 @@
           v-model="ruleForm.precio">
         </el-input>
       </el-form-item>
-      <el-form-item>
+      <!-- <el-form-item>
         <el-button type="primary" @click="adicionales = true">Agregar adicionales</el-button>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
         <el-button @click="resetForm('ruleForm')">Reset</el-button>
       </el-form-item>
     </el-form>
-  <div class="newFormAdicionales" v-if="adicionales">
-    <el-button type="primary" @click="agregarAdicional()">Agregar otro adicional</el-button>
-      <el-button @click="resetForm('ruleForm')">Limpiar</el-button>
-      <el-form v-for="(list,index) in listaadicionales" :key="index" ref="ruleForm" label-width="120px" >
-        <h3>Adicional #{{index+1}}</h3>
-        <el-form-item label="Nombre">
-          <el-input v-model="adicional.name" placeholder="Escribe un nombre del producto" ></el-input>
-        </el-form-item>
-        <el-form-item label="Precio">
-          <el-input type="number"
-            placeholder="Ingresa el precio del producto"
-            v-model="adicional.precio">
-          </el-input>
-        </el-form-item>
-      </el-form>
-      <el-button type="primary">Create</el-button>
-  </div>
+    <!-- <div class="newFormAdicionales" v-if="adicionales">
+      <el-button type="primary" @click="agregarAdicional()">Agregar otro adicional</el-button>
+        <el-button @click="resetForm('ruleForm')">Limpiar</el-button>
+        <el-form v-for="(list,index) in listaadicionales" :key="index" ref="ruleForm" label-width="120px" >
+          <h3>Adicional #{{index+1}}</h3>
+          <el-form-item label="Nombre">
+            <el-input v-model="adicional.name" placeholder="Escribe un nombre del producto" ></el-input>
+          </el-form-item>
+          <el-form-item label="Precio">
+            <el-input type="number"
+              placeholder="Ingresa el precio del producto"
+              v-model="adicional.precio">
+            </el-input>
+          </el-form-item>
+        </el-form>
+        <el-button type="primary">Create</el-button>
+    </div> -->
 </div>
   
 </template>
@@ -82,9 +71,9 @@ export default {
     data() {
       return {
         dialogImageUrl: '',
-        adicionales:false,
+        // adicionales:false,
         dialogVisible: false,
-        listaadicionales:[],
+        // listaadicionales:[],
         ruleForm: {
           nombre:'',
           precio:null,
@@ -143,10 +132,10 @@ export default {
         console.log(formName)
         this.$refs[formName].resetFields();
       },
-      agregarAdicional() {
-        this.listaadicionales.push([{nombre:"", precio:""}])
-        ruleForm.adicionales= this.listaadicionales 
-      }
+      // agregarAdicional() {
+      //   this.listaadicionales.push([{nombre:"", precio:""}])
+      //   ruleForm.adicionales= this.listaadicionales 
+      // }
     }
   }
 </script>

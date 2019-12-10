@@ -61,7 +61,6 @@ export default {
       },
       methods:{
         editarproducto(producto){
-          console.log(producto)
           this.$router.push('productos/editarproducto')
           this.$store.commit('SET_EDITARPRODUCTO',producto)
         },
