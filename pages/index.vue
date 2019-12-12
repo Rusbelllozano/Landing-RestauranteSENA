@@ -55,8 +55,8 @@
         </iframe>
         <div class="develop">
          <h2>Desarrollado por Rusbell Lozano</h2>
-         <h2>Presentado a Ing. Carolina Quevedo</h2>
-         <h3>Analisis y Desarrollo de sistemas de información</h3>
+         <h2>Presentado a Ing. Carolina Quevedo Benitez</h2>
+         <h3>Tecnologo en Analisis y Desarrollo de sistemas de información</h3>
          <p>Proyecto final - etapa lectiva</p>
         </div>
       </div>
@@ -199,6 +199,7 @@ header{
         justify-content: center;
         align-content: center;
         .develop{
+          margin-top:10px;
           display:grid;
           justify-content:center;
           text-align:center;
